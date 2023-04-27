@@ -1,3 +1,9 @@
+"""""
+01_dictionary_v1.py
+Dictionary list of all of the creators provided in the assessment doc.
+Shouldn't require another version
+"""
+
 creatures = {
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
