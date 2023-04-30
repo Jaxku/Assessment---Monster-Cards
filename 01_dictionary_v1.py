@@ -4,6 +4,7 @@ Dictionary list of all of the creators provided in the assessment doc.
 Shouldn't require another version
 """
 
+# Dictionary to store the details of monster cards
 creatures = {
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
