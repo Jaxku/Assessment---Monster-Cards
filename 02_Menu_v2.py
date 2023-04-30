@@ -1,9 +1,6 @@
 """""
-02_menu_v1.py
-First version of the menu function based off the Burger Combo Menu option in the last assessment.
-Please note in this version of the program
-that the search, add, and delete functionality sections
-are not implemented and currently do nothing when selected.
+02_menu_v2.py
+This verison of the menu function will make the search, delete, etc functions to be usable
 """
 
 
@@ -28,21 +25,40 @@ def display_menu():
     list_of_food = []
     for key in creatures.keys():
         list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])
+    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"], msgAlign="center")
     if option == "Search":
-        # Code for search functionality
-        pass
+        search_creature()
     elif option == "Add":
-        # Code for add functionality
-        pass
+        add_creature()
     elif option == "Delete":
-        # Code for delete functionality
-        pass
+        delete_creature()
     elif option == "Menu":
         easygui.msgbox(creatures)
     else:
         raise Exception("Invalid option selected")
     return
+
+# Function to search for a creature
+def search_creature():
+    creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
+    if creature_name is None:
+        return
+    if creature_name in creatures:
+        creature_stats = creatures[creature_name]
+        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"], creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
+    else:
+        easygui.msgbox("Creature not found.")
+
+# Function to add a creature
+def add_creature():
+    creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add")
+    if creature_name is None:
+        return
+    creature_stats = {}
+    creature_stats["Strength"] = easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=100)
+    creature_stats["Speed"] = easygui.integerbox("Enter the speed of the creature:", "Add", lowerbound=1, upperbound=100)
+    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1
+
 
 
 # Running the menu code to see if it works
