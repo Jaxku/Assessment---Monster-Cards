@@ -25,7 +25,7 @@ def display_menu():
     list_of_food = []
     for key in creatures.keys():
         list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"], msgAlign="center")
+    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"]) # launches GUI menu
     if option == "Search":
         search_creature()
     elif option == "Add":
