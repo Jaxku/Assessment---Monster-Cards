@@ -1,6 +1,6 @@
 """""
-04_addCreature_v1.py
-First version of the add creature function will be compatible with the menu function.
+04_addCreature_v2.py
+Fixes the upperbound to limit to match the other creatures.
 """
 
 creatures = {
@@ -26,10 +26,10 @@ def add_creature():
     if creature_name is None:
         return
     creature_stats = {}
-    creature_stats["Strength"] = easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=100)
-    creature_stats["Speed"] = easygui.integerbox("Enter the speed of the creature:", "Add", lowerbound=1, upperbound=100)
-    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1, upperbound=100)
-    creature_stats["Cunning"] = easygui.integerbox("Enter the cunning of the creature:", "Add", lowerbound=1, upperbound=100)
+    creature_stats["Strength"] = easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=25)
+    creature_stats["Speed"] = easygui.integerbox("Enter the speed of the creature:", "Add", lowerbound=1, upperbound=25)
+    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1, upperbound=25)
+    creature_stats["Cunning"] = easygui.integerbox("Enter the cunning of the creature:", "Add", lowerbound=1, upperbound=25)
     creatures[creature_name] = creature_stats
     easygui.msgbox(f"Successfully added {creature_name} to the list of creatures!")
 
