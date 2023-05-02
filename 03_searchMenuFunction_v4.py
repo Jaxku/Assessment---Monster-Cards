@@ -1,11 +1,9 @@
 """""
-00_baseMonsterCard_v1.py
-Base v1
+03_searchMenuFunction_v3
+Verison that can be used in base function with search feature enabled.
 """
-
 import easygui
 
-# Dictionary to store the details of monster cards
 creatures = {
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
@@ -18,23 +16,6 @@ creatures = {
     "Froststep": {"Strength": 14, "Speed": 14, "Stealth": 17, "Cunning": 4},
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
-
-
-# Function to display the menu
-def display_menu():
-    list_of_food = []
-    for key in creatures.keys():
-        list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])  # launches GUI menu
-    if option == "Search":
-        search_creature()  # Place holder
-    elif option == "Add":
-        easygui.msgbox("Add Option Pressed")  # Place holder
-    elif option == "Delete":
-        easygui.msgbox("Delete Option Pressed")  # Place holder
-    else:
-        raise Exception("Invalid option selected")
-    return
 
 
 # Function to search for a creature
@@ -52,4 +33,5 @@ def search_creature():
         display_menu()  # Returns to main menu
 
 
-display_menu()  # Displays menu
+# Testing
+search_creature()

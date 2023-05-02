@@ -1,6 +1,5 @@
 
-
-
+import easygui
 
 # Function to add a creature
 def add_creature():
@@ -10,4 +9,7 @@ def add_creature():
     creature_stats = {}
     creature_stats["Strength"] = easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=100)
     creature_stats["Speed"] = easygui.integerbox("Enter the speed of the creature:", "Add", lowerbound=1, upperbound=100)
-    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1
+    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1, upperbound=100)
+    creature_stats["Cunning"] = easygui.integerbox("Enter the cunning of the creature:", "Add", lowerbound=1, upperbound=100)
+    creatures[creature_name] = creature_stats
+    easygui.msgbox(f"Successfully added {creature_name} to the list of creatures!")
