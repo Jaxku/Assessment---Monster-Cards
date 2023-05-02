@@ -24,7 +24,7 @@ def search_creature():
         return
     if creature_name in creatures:
         creature_stats = creatures[creature_name]
-        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"],creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
+        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"], creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
     else:
         easygui.msgbox("Creature not found.")
         pass
