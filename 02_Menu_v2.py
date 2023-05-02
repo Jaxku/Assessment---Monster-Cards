@@ -38,17 +38,6 @@ def display_menu():
         raise Exception("Invalid option selected")
     return
 
-# Function to search for a creature
-def search_creature():
-    creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
-    if creature_name is None:
-        return
-    if creature_name in creatures:
-        creature_stats = creatures[creature_name]
-        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"], creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
-    else:
-        easygui.msgbox("Creature not found.")
-
 # Function to add a creature
 def add_creature():
     creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add")
