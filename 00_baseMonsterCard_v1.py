@@ -1,6 +1,6 @@
 """""
-02_menu_v2.py
-Improvement from v1
+00_baseMonsterCard_v1.py
+Base v1
 """
 
 
@@ -21,27 +21,18 @@ creatures = {
 }
 
 # Function to display the menu
-def display_menu():
-    list_of_food = []
-    for key in creatures.keys():
-        list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"]) # launches GUI menu
-    if option == "Search":
-        easygui.msgbox("Search Option Pressed")  # Place holder
-    elif option == "Add":
-        easygui.msgbox("Add Option Pressed")  # Place holder
-    elif option == "Delete":
-        easygui.msgbox("Delete Option Pressed")  # Place holder
-    elif option == "Menu":
-        easygui.msgbox(creatures)
+
+
+
+# Function to search for a creature (used by the display menu function
+def search_creature():
+    creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
+    # Allows user to search for the creature using an enter-box gui
+    if creature_name is None:
+        return
+    if creature_name in creatures:
+        creature_stats = creatures[creature_name]
+        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"], creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
     else:
-        raise Exception("Invalid option selected")
-    return
-
-
-
-
-
-# Running the menu code to see if it works
-display_menu()
-
+        easygui.msgbox("Creature not found.")
+        pass

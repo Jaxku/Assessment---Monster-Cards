@@ -1,6 +1,6 @@
 """""
-02_menu_v2.py
-Improvement from v1
+02_menu_v3.py
+This version of the menu function will fix any problems before adding it to the base code
 """
 
 
@@ -20,28 +20,23 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
+
 # Function to display the menu
 def display_menu():
     list_of_food = []
     for key in creatures.keys():
         list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"]) # launches GUI menu
+    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])  # launches GUI menu
     if option == "Search":
         easygui.msgbox("Search Option Pressed")  # Place holder
     elif option == "Add":
         easygui.msgbox("Add Option Pressed")  # Place holder
     elif option == "Delete":
         easygui.msgbox("Delete Option Pressed")  # Place holder
-    elif option == "Menu":
-        easygui.msgbox(creatures)
     else:
         raise Exception("Invalid option selected")
     return
 
 
-
-
-
 # Running the menu code to see if it works
 display_menu()
-

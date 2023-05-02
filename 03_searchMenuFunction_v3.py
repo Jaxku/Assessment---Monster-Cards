@@ -17,9 +17,11 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
+
 # Function to search for a creature
 def search_creature():
-    creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")  # Allows user to search for the ceature using a enterbox gui
+    creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
+    # Allows user to search for the creature using an enter-box gui
     if creature_name is None:
         return
     if creature_name in creatures:
@@ -28,6 +30,7 @@ def search_creature():
     else:
         easygui.msgbox("Creature not found.")
         pass
+
 
 # Testing
 search_creature()
