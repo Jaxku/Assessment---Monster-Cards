@@ -84,16 +84,21 @@ def add_creature():
     display_menu()  # Returns to main menu
 
 
-def delete_creature():  # Function to delete a creature
-    creature_name = easygui.enterbox("Enter the name of the creature you want to delete:", "Delete")
-    if creature_name is None:
-        return
-    if creature_name in creatures:
-        del creatures[creature_name]
-        easygui.msgbox("Creature deleted successfully.")
-    else:
-        easygui.msgbox("Creature not found.")
-    display_menu()  # Returns to main menu
+def delete_creature(creature_list):  # function to delete a creature from the list
+    while True:
+        creature = easygui.enterbox(msg="Enter the name of the creature to delete:", title="Delete Creature", default="")
+        if creature is None:
+            return None  # user clicked cancel
+
+        if creature.lower() in [name.lower() for name in creature_list]:
+            creature_list.remove([name for name in creature_list if name.lower() == creature.lower()][0])  # remove the first instance of the creature
+            easygui.msgbox(f"{creature} has been deleted from the creature list.", title="Delete Creature")
+            return creature_list  # return the updated list
+        else:
+            msg = f"{creature} was not found in the creature list. Would you like to try again?"
+            response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])  # returns the text of the button clicked
+            if response == "Cancel":
+                return None  # user clicked cancel  #
 
 
 display_menu()  # Displays menu

@@ -1,6 +1,6 @@
 """""
 05_deleteCharacter_v3.py
-If user uses a wrong name the program will prompt the user again to enter a name.
+This verison adds a cancel button so if the user accidentally presses the delete button they can cancel the action.
 """
 
 import easygui
@@ -19,13 +19,18 @@ creatures = {
 }
 
 
-def delete_creature(creatures):
+def delete_creature(creature_list):
     while True:
-        creature = input("Enter the name of the creature you wish to delete: ")
-        if creature in creatures:
-            creatures.remove(creature)
-            print(f"{creature} has been removed from the list of creatures.")
-            break
+        creature = easygui.enterbox(msg="Enter the name of the creature to delete:", title="Delete Creature", default="")
+        if creature is None:
+            return None  # user clicked cancel
+
+        if creature.lower() in [name.lower() for name in creature_list]:
+            creature_list.remove([name for name in creature_list if name.lower() == creature.lower()][0])  # remove the first instance of the creature
+            easygui.msgbox(f"{creature} has been deleted from the creature list.", title="Delete Creature")
+            return creature_list  # return the updated list
         else:
-            print(f"{creature} was not found in the list of creatures. Please try again.")
-    return creatures
+            msg = f"{creature} was not found in the creature list. Would you like to try again?"
+            response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])  # returns the text of the button clicked
+            if response == "Cancel":
+                return None
