@@ -31,7 +31,7 @@ def display_menu():
     elif option == "Add":
         add_creature()  # Launches the add function
     elif option == "Delete":
-        easygui.msgbox("Delete Option Pressed")  # Place holder
+        delete_creature()  # Launches the delete function1
     else:
         raise Exception("Invalid option selected")
     return
@@ -81,7 +81,19 @@ def add_creature():
             new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Field", lowerbound=1, upperbound=25)
             creature_stats[field] = new_value
             message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
-    return
+    display_menu()  # Returns to main menu
+
+
+def delete_creature():  # Function to delete a creature
+    creature_name = easygui.enterbox("Enter the name of the creature you want to delete:", "Delete")
+    if creature_name is None:
+        return
+    if creature_name in creatures:
+        del creatures[creature_name]
+        easygui.msgbox("Creature deleted successfully.")
+    else:
+        easygui.msgbox("Creature not found.")
+    display_menu()  # Returns to main menu
 
 
 display_menu()  # Displays menu
