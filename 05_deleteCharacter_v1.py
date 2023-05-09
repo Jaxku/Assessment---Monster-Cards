@@ -29,3 +29,5 @@ def delete_creature():
     else:
         easygui.msgbox("Creature not found.")
     display_menu()  # Returns to main menu
+
+delete_creature()

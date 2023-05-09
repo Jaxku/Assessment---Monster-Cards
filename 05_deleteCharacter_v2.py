@@ -21,11 +21,13 @@ creatures = {
 
 def delete_creature(creatures):
     while True:
-        creature = input("Enter the name of the creature you wish to delete: ")
+        creature = easygui.enterbox("Enter the name of the creature you wish to delete: ")
         if creature in creatures:
             creatures.remove(creature)
-            print(f"{creature} has been removed from the list of creatures.")
+            easygui.msgbox(f"{creature} has been removed from the list of creatures.")
             break
         else:
-            print(f"{creature} was not found in the list of creatures. Please try again.")
+            easygui.msgbox(f"{creature} was not found in the list of creatures. Please try again.")
     return creatures
+
+delete_creature(creatures)

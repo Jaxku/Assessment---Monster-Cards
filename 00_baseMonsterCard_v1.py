@@ -31,7 +31,7 @@ def display_menu():
     elif option == "Add":
         add_creature()  # Launches the add function
     elif option == "Delete":
-        delete_creature()  # Launches the delete function1
+        delete_creature(creatures)  # Launches the delete function
     else:
         raise Exception("Invalid option selected")
     return
@@ -91,7 +91,7 @@ def delete_creature(creature_list):  # function to delete a creature from the li
             return None  # user clicked cancel
 
         if creature.lower() in [name.lower() for name in creature_list]:
-            creature_list.remove([name for name in creature_list if name.lower() == creature.lower()][0])  # remove the first instance of the creature
+            creature_list.remove([name for name in creature_list if name.lower() == creature.lower()][0])  # remove the first instance of the creature from the list
             easygui.msgbox(f"{creature} has been deleted from the creature list.", title="Delete Creature")
             return creature_list  # return the updated list
         else:

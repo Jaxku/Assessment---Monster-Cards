@@ -34,3 +34,6 @@ def delete_creature(creature_list):
             response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])  # returns the text of the button clicked
             if response == "Cancel":
                 return None
+
+delete_creature(creatures)
+
