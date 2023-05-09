@@ -48,3 +48,5 @@ def add_creature():
             creature_stats[field] = new_value
             message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
     return
+
+add_creature()

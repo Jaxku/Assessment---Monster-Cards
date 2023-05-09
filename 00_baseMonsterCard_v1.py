@@ -73,7 +73,7 @@ def add_creature():
     # Display the newly added creature
     message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
     while True:
-        choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")
+        choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")  # Message added as a variable to keep to PEP* standards
         if choice:
             break
         else:
