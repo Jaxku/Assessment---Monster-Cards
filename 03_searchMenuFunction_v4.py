@@ -1,10 +1,11 @@
 """""
-03_searchMenuFunction_v3
+03_searchMenuFunction_v4
 Verison that can be used in base function with search feature enabled.
 """
+
 import easygui
 
-creatures = {
+creatures = {  # Dictionary of creatures
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
     "Dawnmirage": {"Strength": 5, "Speed": 15, "Stealth": 18, "Cunning": 22},
@@ -18,19 +19,40 @@ creatures = {
 }
 
 
-# Function to search for a creature
 def search_creature():
     creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
-    # Allows user to search for the creature using an enter-box gui
+
     if creature_name is None:
         return
+
+    # capitalize the first letter of the creature_name input
+    creature_name = creature_name.capitalize()
+
+    # check if the creature_name exists in the creatures dictionary
     if creature_name in creatures:
         creature_stats = creatures[creature_name]
-        easygui.msgbox("Creature: {}\nStrength: {}\nSpeed: {}\nStealth: {}\nCunning: {}".format(creature_name, creature_stats["Strength"], creature_stats["Speed"], creature_stats["Stealth"], creature_stats["Cunning"]))
-        display_menu()  # Returns to main menu
+
+        message = f"Creature: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
+
+        while True:
+            choice = easygui.buttonbox(f"{message}\n\nWhat would you like to do?", "Creature Details", choices=["OK", "Edit Stats"])
+
+            if choice == "OK":
+                break
+
+            elif choice == "Edit Stats":
+                field = easygui.buttonbox("Which stat would you like to edit?", "Edit Stat", choices=["Strength", "Speed", "Stealth", "Cunning"])
+                new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Stat", lowerbound=1, upperbound=25)
+                creature_stats[field] = new_value
+                message = f"Creature: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
+                easygui.msgbox("Stat updated successfully!")
+
+        display_menu()
+
     else:
         easygui.msgbox("Creature not found.")
-        display_menu()  # Returns to main menu
+
+    pass
 
 
 # Testing
