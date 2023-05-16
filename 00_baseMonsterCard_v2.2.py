@@ -31,7 +31,7 @@ def display_menu():
     elif option == "Add":
         add_creature()  # Place holder
     elif option == "Delete":
-        delete_creature(creatures)  # Place holder
+        delete_creature(easygui.enterbox(msg="Enter the name of the creature to delete:", title="Delete Creature", default=""))  # Place holder
     else:
         raise Exception("Invalid option selected")
     return
@@ -48,7 +48,7 @@ def search_creature():
     creature_name = creature_name.capitalize()
 
     # check if the creature_name exists in the creatures dictionary
-    if creature_name in creatures:
+    if creature_name in list(creatures.keys()):
         creature_stats = creatures[creature_name]
 
         message = f"Creature: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
@@ -65,13 +65,10 @@ def search_creature():
                 creature_stats[field] = new_value
                 message = f"Creature: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
                 easygui.msgbox("Stat updated successfully!")
+            else:
+                easygui.msgbox("Creature not found.")
 
-        display_menu()  # Return to main menu
-
-    else:
-        easygui.msgbox("Creature not found.")
-
-    pass
+    return
 
 
 # Function to add a creature
@@ -106,19 +103,18 @@ def add_creature():
 # Function to delete a creature
 def delete_creature(creature_list):
     while True:
-        creature = easygui.enterbox(msg="Enter the name of the creature to delete:", title="Delete Creature", default="")
-        if creature is None:
+        if creatures is None:
             display_menu()  # user clicked cancel
 
-        if creature.lower() in [name.lower() for name in creatures]:
-            del creatures[creature.capitalize()]
-            easygui.msgbox(f"{creature} has been deleted from the creature list.", title="Delete Creature")
+        if creatures.lower() in [name.lower() for name in creatures]:
+            del creatures[creatures.capitalize()]
+            easygui.msgbox(f"{creatures} has been deleted from the creature list.", title="Delete Creature")
             return creatures  # return the updated list
             pass
-            display_menu()
         else:
-            msg = f"{creature} was not found in the creature list. Would you like to try again?"
-            response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])  # returns the text of the button clicked
+            msg = f"{creatures} was not found in the creature list. Would you like to try again?"
+            response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])
+            # returns the text of the button clicked
             if response == "Cancel":
                 return None
         display_menu()  # Return to main menurr

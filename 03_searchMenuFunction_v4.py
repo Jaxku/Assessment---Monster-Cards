@@ -52,7 +52,6 @@ def search_creature():
     else:
         easygui.msgbox("Creature not found.")
 
-    pass
 
 
 # Testing
