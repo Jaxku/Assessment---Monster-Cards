@@ -1,12 +1,11 @@
 """""
-00_baseMonsterCard_v3.py
-v3
+03_searchMenuFunction_v5
+Verison that can be used in base function with search feature enabled.
 """
 
 import easygui
 
-# Dictionary to store the details of monster cards
-creatures = {
+creatures = {  # Dictionary of creatures
     "Stoneling": {"Strength": 7, "Speed": 1, "Stealth": 25, "Cunning": 15},
     "Vexscream": {"Strength": 1, "Speed": 6, "Stealth": 21, "Cunning": 19},
     "Dawnmirage": {"Strength": 5, "Speed": 15, "Stealth": 18, "Cunning": 22},
@@ -20,25 +19,6 @@ creatures = {
 }
 
 
-# Function to display the menu
-def display_menu():
-    list_of_food = []
-    for key in creatures.keys():
-        list_of_food.append(key)
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])
-    # launches GUI menu
-    if option == "Search":
-        search_creature()  # Launches function to search for creature
-    elif option == "Add":
-        add_creature()  # Launches function to add creature
-    elif option == "Delete":
-        easygui.msgbox("Delete Option Pressed")  # Place holder
-    else:
-        raise Exception("Invalid option selected")
-    return
-
-
-# Function to search for a creature
 def search_creature():
     while True:
         creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
@@ -94,38 +74,5 @@ def search_creature():
             easygui.msgbox("Creature not found.")
 
 
-# Function to add a creature
-def add_creature():
-    creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add")
-    if creature_name is None:
-        return
-    creature_stats = dict()
-    creature_stats["Strength"] = {}
-    creature_stats["Speed"] = {}
-    creature_stats["Stealth"] = {}
-    creature_stats["Cunning"] = {}
-
-    creature_stats["Strength"] = easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=25)
-    creature_stats["Speed"] = easygui.integerbox("Enter the speed of the creature:", "Add", lowerbound=1, upperbound=25)
-    creature_stats["Stealth"] = easygui.integerbox("Enter the stealth of the creature:", "Add", lowerbound=1, upperbound=25)
-    creature_stats["Cunning"] = easygui.integerbox("Enter the cunning of the creature:", "Add", lowerbound=1, upperbound=25)
-
-    creatures[creature_name] = creature_stats
-
-    # Display the newly added creature
-    message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
-    while True:
-        choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")
-        if choice:
-            easygui.msgbox("Creature added successfully!")
-            display_menu()  # Go back to the main menu
-        else:
-            field = easygui.buttonbox("Which field would you like to change?", "Edit Field", choices=["Strength", "Speed", "Stealth", "Cunning"])
-            new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Field", lowerbound=1, upperbound=25)
-            creature_stats[field] = new_value
-            message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
-            easygui.msgbox("Creature added successfully!")
-            display_menu()  # Go back to the main menu
-
-
-display_menu()
+# Testing
+search_creature()
