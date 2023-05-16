@@ -37,8 +37,8 @@ def search_creature():
         while True:
             choice = easygui.buttonbox(f"{message}\n\nWhat would you like to do?", "Creature Details", choices=["OK", "Edit Stats"])
 
-            if choice == "OK":
-                break
+            if choice == "Return to Main Menu":
+                display_menu()  # Return to main menu
 
             elif choice == "Edit Stats":
                 field = easygui.buttonbox("Which stat would you like to edit?", "Edit Stat", choices=["Strength", "Speed", "Stealth", "Cunning"])

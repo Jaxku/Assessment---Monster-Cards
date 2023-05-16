@@ -42,7 +42,7 @@ def add_creature():
         choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")
         if choice:
             easygui.msgbox("Creature added successfully!")
-            break
+            display_menu()  # Go back to the main menu
         else:
             field = easygui.buttonbox("Which field would you like to change?", "Edit Field", choices=["Strength", "Speed", "Stealth", "Cunning"])
             new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Field", lowerbound=1, upperbound=25)

@@ -18,22 +18,22 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
-
 def delete_creature(creature_list):
     while True:
         creature = easygui.enterbox(msg="Enter the name of the creature to delete:", title="Delete Creature", default="")
         if creature is None:
             return None  # user clicked cancel
 
-        if creature.lower() in [name.lower() for name in creature_list]:
-            creature_list.remove([name for name in creature_list if name.lower() == creature.lower()][0])  # remove the first instance of the creature
+        if creature.lower() in [name.lower() for name in creatures]:
+            del creatures[creature.capitalize()]
             easygui.msgbox(f"{creature} has been deleted from the creature list.", title="Delete Creature")
-            return creature_list  # return the updated list
+            return creatures  # return the updated list
         else:
             msg = f"{creature} was not found in the creature list. Would you like to try again?"
             response = easygui.buttonbox(msg, title="Delete Creature", choices=["Try Again", "Cancel"])  # returns the text of the button clicked
             if response == "Cancel":
                 return None
+
 
 delete_creature(creatures)
 
