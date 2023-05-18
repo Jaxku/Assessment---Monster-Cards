@@ -25,16 +25,16 @@ session_creatures = {}
 
 # Function to display the menu
 def display_menu():
-    option = easygui.buttonbox("What would you like to do?", "Main Menu", choices=["Search", "Add", "Delete", "Menu"])
+    option = easygui.buttonbox("What would you like to do?", "Main Menu", choices=["Search", "Add", "Delete", "Print"])
 
-    if option == "Search":
+    if option == "Search":  # Launches search for a creature
         search_creature()
-    elif option == "Add":
+    elif option == "Add":  # Launches add a creature
         add_creature()
-    elif option == "Delete":
+    elif option == "Delete":  # Launches delete a creature
         delete_creature()
-    else:
-        raise Exception("Invalid option selected")
+    elif option == "Print":  # Launches print all creatures
+        print_menu()
 
 
 # Function to search for a creature
