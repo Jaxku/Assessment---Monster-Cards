@@ -25,20 +25,16 @@ session_creatures = {}
 
 # Function to display the menu
 def display_menu():
-    list_of_food = []
-    for key in creatures.keys():
-        list_of_food.append(key)
     option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])
-    # launches GUI menu
+
     if option == "Search":
-        search_creature()  # Launches function to search for creature
+        search_creature()
     elif option == "Add":
-        add_creature()  # Launches function to add creature
+        add_creature()
     elif option == "Delete":
-        delete_creature()  # Place holder
+        delete_creature()
     else:
         raise Exception("Invalid option selected")
-    return
 
 
 # Function to search for a creature
@@ -47,19 +43,19 @@ def search_creature():
         creature_name = easygui.enterbox("Enter the name of the creature you want to search for:", "Search")
 
         if creature_name is None:
-            display_menu()  # Return to main menu
+            display_menu()
             return
 
         creature_name = creature_name.capitalize()
 
-        if creature_name in creatures:
-            creature_stats = creatures[creature_name]
+        if creature_name in creatures or creature_name in session_creatures:
+            creature_stats = creatures.get(creature_name) or session_creatures.get(creature_name)
 
             message = f"Creature: {creature_name}\n" \
                       f"Strength: {creature_stats['Strength']}\n" \
-                      f"Speed: {creature_stats['Speed']}" \
-                      f"\nStealth: {creature_stats['Stealth']}" \
-                      f"\nCunning: {creature_stats['Cunning']}"
+                      f"Speed: {creature_stats['Speed']}\n" \
+                      f"Stealth: {creature_stats['Stealth']}\n" \
+                      f"Cunning: {creature_stats['Cunning']}"
 
             while True:
                 choice = easygui.buttonbox(
@@ -69,8 +65,8 @@ def search_creature():
                 )
 
                 if choice == "Return to Main Menu":
-                    display_menu()  # Return to main menu
-                    return  # Exit the function
+                    display_menu()
+                    return
 
                 elif choice == "Edit Stats":
                     field = easygui.buttonbox(
@@ -85,14 +81,14 @@ def search_creature():
                         upperbound=25
                     )
                     creature_stats[field] = new_value
-                    message = f"Creature: {creature_name}" \
-                              f"\nStrength: {creature_stats['Strength']}" \
-                              f"\nSpeed: {creature_stats['Speed']}" \
-                              f"\nStealth: {creature_stats['Stealth']}" \
-                              f"\nCunning: {creature_stats['Cunning']}"
+                    message = f"Creature: {creature_name}\n" \
+                              f"Strength: {creature_stats['Strength']}\n" \
+                              f"Speed: {creature_stats['Speed']}\n" \
+                              f"Stealth: {creature_stats['Stealth']}\n" \
+                              f"Cunning: {creature_stats['Cunning']}"
                     easygui.msgbox("Stat updated successfully!")
                 elif choice == "OK":
-                    break  # Exit the inner loop and search for a new character
+                    break
         else:
             easygui.msgbox("Creature not found.")
 
@@ -102,8 +98,14 @@ def add_creature():
     while True:
         creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add Creature")
         if creature_name is None:
-            display_menu()  # Go back to the main menu
+            display_menu()
             return
+
+        creature_name = creature_name.capitalize()
+
+        if creature_name in creatures or creature_name in session_creatures:
+            easygui.msgbox("Creature already exists.")
+            continue
 
         creature_stats = {
             "Strength": easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=25),
@@ -114,22 +116,31 @@ def add_creature():
 
         session_creatures[creature_name] = creature_stats
 
-        # Display the newly added creature
         message = f"The following creature has been added:\n" \
                   f"\nName: {creature_name}" \
                   f"\nStrength: {creature_stats['Strength']}" \
                   f"\nSpeed: {creature_stats['Speed']}" \
                   f"\nStealth: {creature_stats['Stealth']}" \
                   f"\nCunning: {creature_stats['Cunning']}"
+
         while True:
             choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")
             if choice:
                 easygui.msgbox("Creature added successfully!")
-                display_menu()  # Go back to the main menu
+                display_menu()
                 return
             else:
-                field = easygui.buttonbox("Which field would you like to change?", "Edit Field", choices=["Strength", "Speed", "Stealth", "Cunning"])
-                new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Field", lowerbound=1, upperbound=25)
+                field = easygui.buttonbox(
+                    "Which field would you like to change?",
+                    "Edit Field",
+                    choices=["Strength", "Speed", "Stealth", "Cunning"]
+                )
+                new_value = easygui.integerbox(
+                    f"Enter the new value for {field}:",
+                    "Edit Field",
+                    lowerbound=1,
+                    upperbound=25
+                )
                 creature_stats[field] = new_value
                 message = f"The following creature has been added:\n" \
                           f"\nName: {creature_name}" \
@@ -138,8 +149,7 @@ def add_creature():
                           f"\nStealth: {creature_stats['Stealth']}" \
                           f"\nCunning: {creature_stats['Cunning']}"
                 easygui.msgbox("Creature added successfully!")
-                display_menu()  # Go back to the main menu
-
+                display_menu()
 
 
 # Function to delete a creature
@@ -148,7 +158,7 @@ def delete_creature():
         creature_name = easygui.enterbox("Enter the name of the creature you want to delete:", "Delete Creature")
 
         if creature_name is None:
-            display_menu()  # Go back to the main menu
+            display_menu()
             return
 
         creature_name = creature_name.capitalize()
@@ -156,11 +166,13 @@ def delete_creature():
         if creature_name in creatures:
             del creatures[creature_name]
             easygui.msgbox(f"{creature_name} has been deleted from the creature list.")
-            display_menu()  # Go back to the main menu
-            return
+        elif creature_name in session_creatures:
+            del session_creatures[creature_name]
+            easygui.msgbox(f"{creature_name} has been deleted from the current session.")
         else:
-            easygui.msgbox("Creature not found in the creature list.")
+            easygui.msgbox("Creature not found.")
 
+        display_menu()
 
 
 display_menu()
