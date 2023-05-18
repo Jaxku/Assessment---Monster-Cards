@@ -175,4 +175,26 @@ def delete_creature():
         display_menu()
 
 
+# Function to print the list of creatures
+def print_menu():
+    easygui.msgbox("Press 'ok' to print the list of creatures to console.", "Print Creatures")
+    menu = "Menu:"
+    # Print creatures from the dictionary
+    for creature, stats in creatures.items():
+        menu += f"{creature}: Strength={stats['Strength']}, " \
+                f"Speed={stats['Speed']}, " \
+                f"Stealth={stats['Stealth']}, " \
+                f"Cunning={stats['Cunning']}\n"
+
+    # Print creatures from the session
+    menu += "Temporary Creatures:\n"
+    for creature, stats in session_creatures.items():
+        menu += f"{creature}: Strength={stats['Strength']}, " \
+                f"Speed={stats['Speed']}, " \
+                f"Stealth={stats['Stealth']}, " \
+                f"Cunning={stats['Cunning']}\n"
+
+    print(menu)
+
+
 display_menu()

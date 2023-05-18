@@ -1,6 +1,6 @@
 """""
 06_printConsole_v1.py
-First version of the print console function
+First version of the print console function. My take on the function as the project brief is a bit vague.
 """
 import easygui
 
