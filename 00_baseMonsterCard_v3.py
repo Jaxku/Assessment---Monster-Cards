@@ -19,6 +19,9 @@ creatures = {
     "Wispghoul": {"Strength": 17, "Speed": 19, "Stealth": 3, "Cunning": 2}
 }
 
+# Dictionary to store the details of monster cards added during the current session
+session_creatures = {}
+
 
 # Function to display the menu
 def display_menu():
@@ -32,7 +35,7 @@ def display_menu():
     elif option == "Add":
         add_creature()  # Launches function to add creature
     elif option == "Delete":
-        easygui.msgbox("Delete Option Pressed")  # Place holder
+        delete_creature()  # Place holder
     else:
         raise Exception("Invalid option selected")
     return
@@ -97,9 +100,10 @@ def search_creature():
 # Function to add a creature
 def add_creature():
     while True:
-        creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add")
+        creature_name = easygui.enterbox("Enter the name of the creature you want to add:", "Add Creature")
         if creature_name is None:
-            continue  # Go back to the start of the function
+            display_menu()  # Go back to the main menu
+            return
 
         creature_stats = {
             "Strength": easygui.integerbox("Enter the strength of the creature:", "Add", lowerbound=1, upperbound=25),
@@ -108,10 +112,15 @@ def add_creature():
             "Cunning": easygui.integerbox("Enter the cunning of the creature:", "Add", lowerbound=1, upperbound=25)
         }
 
-        creatures[creature_name] = creature_stats
+        session_creatures[creature_name] = creature_stats
 
         # Display the newly added creature
-        message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
+        message = f"The following creature has been added:\n" \
+                  f"\nName: {creature_name}" \
+                  f"\nStrength: {creature_stats['Strength']}" \
+                  f"\nSpeed: {creature_stats['Speed']}" \
+                  f"\nStealth: {creature_stats['Stealth']}" \
+                  f"\nCunning: {creature_stats['Cunning']}"
         while True:
             choice = easygui.ynbox(f"{message}\n\nAre these details correct?", "Confirm Details")
             if choice:
@@ -122,8 +131,36 @@ def add_creature():
                 field = easygui.buttonbox("Which field would you like to change?", "Edit Field", choices=["Strength", "Speed", "Stealth", "Cunning"])
                 new_value = easygui.integerbox(f"Enter the new value for {field}:", "Edit Field", lowerbound=1, upperbound=25)
                 creature_stats[field] = new_value
-                message = f"The following creature has been added:\n\nName: {creature_name}\nStrength: {creature_stats['Strength']}\nSpeed: {creature_stats['Speed']}\nStealth: {creature_stats['Stealth']}\nCunning: {creature_stats['Cunning']}"
+                message = f"The following creature has been added:\n" \
+                          f"\nName: {creature_name}" \
+                          f"\nStrength: {creature_stats['Strength']}" \
+                          f"\nSpeed: {creature_stats['Speed']}" \
+                          f"\nStealth: {creature_stats['Stealth']}" \
+                          f"\nCunning: {creature_stats['Cunning']}"
                 easygui.msgbox("Creature added successfully!")
                 display_menu()  # Go back to the main menu
+
+
+
+# Function to delete a creature
+def delete_creature():
+    while True:
+        creature_name = easygui.enterbox("Enter the name of the creature you want to delete:", "Delete Creature")
+
+        if creature_name is None:
+            display_menu()  # Go back to the main menu
+            return
+
+        creature_name = creature_name.capitalize()
+
+        if creature_name in creatures:
+            del creatures[creature_name]
+            easygui.msgbox(f"{creature_name} has been deleted from the creature list.")
+            display_menu()  # Go back to the main menu
+            return
+        else:
+            easygui.msgbox("Creature not found in the creature list.")
+
+
 
 display_menu()
