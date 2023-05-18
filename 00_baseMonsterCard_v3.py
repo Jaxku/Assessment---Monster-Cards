@@ -25,7 +25,7 @@ session_creatures = {}
 
 # Function to display the menu
 def display_menu():
-    option = easygui.buttonbox("What would you like to do?", choices=["Search", "Add", "Delete", "Menu"])
+    option = easygui.buttonbox("What would you like to do?", "Main Menu", choices=["Search", "Add", "Delete", "Menu"])
 
     if option == "Search":
         search_creature()
