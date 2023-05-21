@@ -1,6 +1,5 @@
 """""
-00_baseMonsterCard_v3.py
-v3
+Monster Card Final Version!
 """
 
 import easygui
