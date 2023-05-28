@@ -159,7 +159,7 @@ def add_creature():
                     lowerbound=1,
                     upperbound=25
                 )
-                creature_stats = new_value  # Update the dictionary
+                creature_stats[field] = new_value  # Update the field value
                 message = f"The following creature has been added:\n" \
                           f"\nName: {creature_name}" \
                           f"\nStrength: {creature_stats['Strength']}" \
@@ -168,7 +168,7 @@ def add_creature():
                           f"\nCunning: {creature_stats['Cunning']}"
                 easygui.msgbox(
                     "Creature added successfully!")  # Confirmation message
-                display_menu()  # Return to main menu
+                display_menu()  # Return to the main menu
 
 
 # Function to delete a creature
@@ -180,7 +180,7 @@ def delete_creature():
 
         if creature_name is None:  # If the user presses cancel
             display_menu()
-            return
+            break
 
         creature_name = creature_name.capitalize()
 
